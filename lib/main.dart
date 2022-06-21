@@ -13,6 +13,7 @@ import 'package:at_utils/at_logger.dart' show AtSignLogger;
 import 'package:path_provider/path_provider.dart'
     show getApplicationSupportDirectory;
 import 'package:at_app_flutter/at_app_flutter.dart' show AtEnv;
+import 'package:snackbar/widgets/BottomBar.dart';
 
 //String snack = '';
 Future<void> main() async {
@@ -73,7 +74,7 @@ class _MyAppState extends State<MyApp> {
                   onError: (error) {
                     _logger.severe('Onboarding throws $error error');
                   },
-                  nextScreen: const HomeScreen(),
+                  nextScreen: const BottomBar(),
                 );
               },
               child: const Text('Onboard an @sign'),
