@@ -12,7 +12,7 @@ class MySnackBar extends StatelessWidget {
   Widget build(context) {
     return (Scaffold(
       body: SnackBar(
-        content: CustomSnackBar(),
+        content: CustomSnackBar("Message"),
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -20,10 +20,10 @@ class MySnackBar extends StatelessWidget {
     ));
   }
 
-  show() {
+  show(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: CustomSnackBar(),
+        content: CustomSnackBar(message),
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -31,7 +31,7 @@ class MySnackBar extends StatelessWidget {
     );
   }
 
-  Stack CustomSnackBar() {
+  Stack CustomSnackBar(String message) {
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -62,8 +62,8 @@ class MySnackBar extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    const Text(
-                      "It seems like a gimmick, being an eight-sided Bluetooth device you turn over to track tasks or breaks",
+                    Text(
+                      message,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.white,

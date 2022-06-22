@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       // * The onboarding screen (first screen)
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Send yourself a Snackbar'),
+          title: const Text('Securely Track Your Activities'),
         ),
         body: Builder(
           builder: (context) => Center(

@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const Text('Send yourself a snackbar'),
             ElevatedButton(
               onPressed: () {
-                sendAtsignData.call(context, lastsnack);
+                sendAtssignData.call(context, lastsnack);
               },
               child: const Text('Send a snack'),
             ),
@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ElevatedButton(
               onPressed: () {
                 print("getting Snack Bar....");
-                getAtSignData(context, 'snackbar');
+                getAtSsignData(context, 'snackbar');
               },
               child: const Text("Get SnackBar"),
             ),
@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-void sendAtsignData(context, Snack lastsnack) async {
+void sendAtssignData(context, Snack lastsnack) async {
   /// Get the AtClientManager instance
   var atClientManager = AtClientManager.getInstance();
 
@@ -193,7 +193,7 @@ void sendAtsignData(context, Snack lastsnack) async {
   popSnackBar(context, snackbar.snack);
 }
 
-void getAtSignData(context, String lookUpKey) async {
+void getAtSsignData(context, String lookUpKey) async {
   var atClientManager = AtClientManager.getInstance();
   Future<AtClientPreference> futurePreference = loadAtClientPreference();
 

@@ -4,40 +4,32 @@ import 'dart:convert';
 
 class TimerItem {
   final String id;
-  final String name;
-  final String start;
-  final String end;
-  final String isoDate;
-  TimerItem({
-    required this.id,
-    required this.name,
-    required this.start,
-    required this.end,
-    required this.isoDate,
-  });
+  final String startTime;
+  final String endTime;
+  final String description;
+
+  TimerItem(this.id, this.startTime, this.endTime, this.description);
+  
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'name': name,
-      'start': start,
-      'end': end,
-      'isoDate': isoDate,
+      'startTime': startTime,
+      'endTime': endTime,
+      'description': description,
     };
   }
 
   factory TimerItem.fromMap(Map<String, dynamic> map) {
     return TimerItem(
-      id: map['id'],
-      name: map['name'],
-      start: map['start'],
-      end: map['end'],
-      isoDate: map['isoDate'],
+      map['id'],
+      map['startTime'],
+      map['endTime'],
+      map['description'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory TimerItem.fromJson(String source) =>
-      TimerItem.fromMap(json.decode(source));
+  factory TimerItem.fromJson(String source) => TimerItem.fromMap(json.decode(source));
 }

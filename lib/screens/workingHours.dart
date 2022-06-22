@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:snackbar/constants/GlobalVariables.dart';
+import 'package:snackbar/controllers/AtSignController.dart';
+import 'package:snackbar/model/timerItem.dart';
 import 'package:snackbar/utils/MySnackBar.dart';
+import 'package:snackbar/utils/templates/template.dart';
 import 'package:snackbar/widgets/CustomButton.dart';
 import 'package:snackbar/widgets/CustomeEditText.dart';
 import 'package:snackbar/widgets/FocusTimeCard.dart';
@@ -41,6 +44,7 @@ class _WorkingHoursState extends State<WorkingHours> {
 
   @override
   Widget build(BuildContext context) {
+    TrackerTimerController timerController = new TrackerTimerController();
     return Scaffold(
       body: Center(
         child: Padding(
@@ -157,7 +161,7 @@ class _WorkingHoursState extends State<WorkingHours> {
                   hintText: 'Start Time',
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 CustomeTextField(
                   controller: endTimeController,
@@ -169,7 +173,7 @@ class _WorkingHoursState extends State<WorkingHours> {
                 CustomeTextField(
                   controller: descriptionController,
                   hintText: 'Dev experiencess are  worthy to be  remembered !!',
-                  maxLines: 3,
+                  maxLines: 2,
                 ),
                 SizedBox(
                   width: double.infinity,
@@ -197,7 +201,15 @@ class _WorkingHoursState extends State<WorkingHours> {
         ),
       );
   void submit() {
+    TimerItem newTrackerData = new TimerItem(
+        "davidtext",
+        startTimeController.text,
+        endTimeController.text,
+        descriptionController.text);
+
+    //sending to the server
+    TrackerTimerController.sendAtSignData(context, newTrackerData);
+
     Navigator.of(context).pop();
-    MySnackBar(context: context).show();
   }
 }
