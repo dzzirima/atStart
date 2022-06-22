@@ -25,7 +25,7 @@ class TrackerTimerController {
       print(customLengthId);
 
       var key = AtKey()
-        ..key = 'trk' + "zirima"
+        ..key = 'trk' + customLengthId
         ..sharedBy = currentAtsign
         ..metadata = metaData;
 
@@ -40,10 +40,6 @@ class TrackerTimerController {
       print("Error " + e.toString());
     }
   }
-
-  
-
-
 
   void getAtSignData(context, String lookUpKey) async {
     String RegExp = "/.*/";
@@ -79,9 +75,4 @@ class TrackerTimerController {
       print(e.toString());
     }
   }
-
-  
-
-
-
 }
