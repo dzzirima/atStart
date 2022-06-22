@@ -1,3 +1,3 @@
-# snackbar
+# timetracker
 
-A new Flutter project
+A simple app one can use to keep track of your time utilisation
