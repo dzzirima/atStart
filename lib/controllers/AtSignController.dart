@@ -46,13 +46,8 @@ class TrackerTimerController {
     // regex: '^cached:.*@.+\$',
 
     try {
-      /**This function is used to lookup the keys 
-     * but i have a problem how can i look up if i dont know the keys
-     * 
-     */
       AtClient atClient = AtClientManager.getInstance().atClient;
       var currentAtsign = atClient.getCurrentAtSign();
-      /**I dont want to repeat copying this thing  */
 
       var metaData = Metadata()
         ..isPublic = true
@@ -65,12 +60,10 @@ class TrackerTimerController {
 
       //**getting all the time trackers i would have added */
       var userKeys = await atClient.getAtKeys(sharedBy: currentAtsign);
-
+      /**specify the name of  key and get the corresponding data of the key   */
       var trackerTime = await atClient.get(key);
 
       print("Here are your keys :" + userKeys.toString());
-      // print("Current atSign:" + currentAtsign!);
-      // print("Here are your results :" + trackerTime.value.toString());
     } catch (e) {
       print(e.toString());
     }
