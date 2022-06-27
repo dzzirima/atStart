@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:snackbar/model/timerItem.dart';
+import 'package:snackbar/providers/GetData.dart';
 import 'package:snackbar/utils/MySnackBar.dart';
 import 'package:snackbar/utils/templates/template.dart';
 import 'package:uuid/uuid.dart';
@@ -13,6 +14,7 @@ class TrackerTimerController {
   AtClientService? atClientService;
   static var atClientManager = AtClientManager.getInstance();
   static var currentAtsign = atClientManager.atClient.getCurrentAtSign();
+  static GetDataProvider myDataProvider = new GetDataProvider();
 
   static void sendAtSignData(context, TimerItem myTrackerData) async {
     try {
@@ -41,7 +43,7 @@ class TrackerTimerController {
     }
   }
 
-  Future<List<TimerItem>> getAtSignData(context, String lookUpKey) async {
+  getAtSignData(context, String lookUpKey) async {
     List<TimerItem> myTimers = [];
     try {
       /**This function is used to lookup the keys 
@@ -60,8 +62,10 @@ class TrackerTimerController {
         try {
           if (key.sharedBy != null) {
             AtValue _keyValue = await atClient.get(key);
+
             //creating a timer here forom json
-            myTimers.add(TimerItem.fromJson(jsonDecode(_keyValue.value)));
+            myTimers.add(TimerItem.fromJson(_keyValue.value));
+            // myTimers.add(myItemJson);
           }
         } catch (e) {
           print(e.toString());
@@ -74,6 +78,6 @@ class TrackerTimerController {
       print(e.toString());
     }
 
-    return myTimers;
+    myDataProvider.setListOfTimers(myTimers);
   }
 }

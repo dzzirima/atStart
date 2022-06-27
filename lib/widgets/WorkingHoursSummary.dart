@@ -25,7 +25,7 @@ class _WorkingHoursSummaryState extends State<WorkingHoursSummary> {
       child: GestureDetector(
         onTap: () {
           //change the internal structure of the global state of the provider
-          provider.increment();
+          timerController.getAtSignData("", "");
         },
         child: DottedBorder(
           borderType: BorderType.RRect,
