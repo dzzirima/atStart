@@ -43,7 +43,9 @@ class TrackerTimerController {
 
   void getAtSignData(context, String lookUpKey) async {
     String RegExp = "/.*/";
-    // regex: '^cached:.*@.+\$',
+    regex:
+    '^cached:.*@.+\$';
+    String regex2 = "";
 
     try {
       /**This function is used to lookup the keys 
@@ -64,7 +66,7 @@ class TrackerTimerController {
         ..metadata = metaData;
 
       //**getting all the time trackers i would have added */
-      var userKeys = await atClient.getAtKeys(sharedBy: currentAtsign);
+      var userKeys = await atClient.getAtKeys(regex: '[public]:[trk]');
 
       var trackerTime = await atClient.get(key);
 
