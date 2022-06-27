@@ -13,12 +13,19 @@ import 'package:at_utils/at_logger.dart' show AtSignLogger;
 import 'package:path_provider/path_provider.dart'
     show getApplicationSupportDirectory;
 import 'package:at_app_flutter/at_app_flutter.dart' show AtEnv;
+import 'package:provider/provider.dart';
+import 'package:snackbar/providers/GetData.dart';
 import 'package:snackbar/widgets/BottomBar.dart';
 
 //String snack = '';
 Future<void> main() async {
   await AtEnv.load();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => GetDataProvider())],
+      child: const MyApp(),
+    ),
+  );
 }
 
 Future<AtClientPreference> loadAtClientPreference() async {

@@ -41,14 +41,13 @@ class TrackerTimerController {
     }
   }
 
-  void getAtSignData(context, String lookUpKey) async {
+  Future getAtSignData(context, String lookUpKey) async {
     try {
       /**This function is used to lookup the keys 
      * but i have a problem how can i look up if i dont know the keys
      * Solved by getting  scanning the whole atSign seconadry
      */
       AtClient atClient = AtClientManager.getInstance().atClient;
-      var currentAtsign = atClient.getCurrentAtSign();
       /**I dont want to repeat copying this thing  */
 
       //**getting all the time trackers i would have added */
@@ -65,6 +64,7 @@ class TrackerTimerController {
           print(e.toString());
         }
       }
+      return receivedKeys.length;
       // print("Current atSign:" + currentAtsign!);
       // print("Here are your results :" + trackerTime.value.toString());
     } catch (e) {

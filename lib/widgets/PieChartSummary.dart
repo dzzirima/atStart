@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:provider/provider.dart';
+import 'package:snackbar/providers/GetData.dart';
 
 class PieChartSummary extends StatefulWidget {
   const PieChartSummary({Key? key}) : super(key: key);
@@ -45,6 +47,7 @@ class _PieChartSummaryState extends State<PieChartSummary> {
   ];
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<GetDataProvider>(context, listen: true);
     return SafeArea(
       child: Container(
         child: Column(
@@ -71,7 +74,7 @@ class _PieChartSummaryState extends State<PieChartSummary> {
               dataMap: dataMap,
               colorList: colorList,
               chartRadius: MediaQuery.of(context).size.width / 2,
-              centerText: "3h 23hrs ",
+              centerText: '${provider.count}',
               ringStrokeWidth: 20,
               chartType: ChartType.ring,
               animationDuration: const Duration(seconds: 3),

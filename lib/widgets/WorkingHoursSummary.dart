@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 import 'package:snackbar/controllers/AtSignController.dart';
+import 'package:snackbar/providers/GetData.dart';
 import 'package:snackbar/widgets/PieChartSummary.dart';
 
 class WorkingHoursSummary extends StatefulWidget {
@@ -15,15 +17,18 @@ class WorkingHoursSummary extends StatefulWidget {
 
 class _WorkingHoursSummaryState extends State<WorkingHoursSummary> {
   TrackerTimerController timerController = new TrackerTimerController();
+
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<GetDataProvider>(context, listen: false);
     return Container(
       child: GestureDetector(
         onTap: () {
           /**we awant to refresh the summary and get new things when we refresh 
            * 
           */
-          timerController.getAtSignData(context, "david");
+          // timerController.getAtSignData(context, "david");
+          provider.increment();
         },
         child: DottedBorder(
           borderType: BorderType.RRect,
