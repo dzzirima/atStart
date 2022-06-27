@@ -20,12 +20,14 @@ class _WorkingHoursSummaryState extends State<WorkingHoursSummary> {
   Widget build(BuildContext context) {
     //provider listen , means dont change ..
     var provider = Provider.of<GetDataProvider>(context, listen: false);
+    var dataProvider =
+        Provider.of<TrackerTimerController>(context, listen: false);
 
     return Container(
       child: GestureDetector(
         onTap: () {
           //change the internal structure of the global state of the provider
-          timerController.getAtSignData("", "");
+          dataProvider.getNewData();
         },
         child: DottedBorder(
           borderType: BorderType.RRect,

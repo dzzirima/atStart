@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
+import 'package:snackbar/controllers/AtSignController.dart';
 import 'package:snackbar/providers/GetData.dart';
 
 class PieChartSummary extends StatefulWidget {
@@ -48,7 +49,8 @@ class _PieChartSummaryState extends State<PieChartSummary> {
   @override
   Widget build(BuildContext context) {
     //provider declaration for the consumer :here listen= true means rebuld
-    var provider = Provider.of<GetDataProvider>(context, listen: true);
+    var dataProvider =
+        Provider.of<TrackerTimerController>(context, listen: true);
 
     return SafeArea(
       child: Container(
@@ -77,7 +79,7 @@ class _PieChartSummaryState extends State<PieChartSummary> {
               colorList: colorList,
               chartRadius: MediaQuery.of(context).size.width / 2,
               //consuming the provider value
-              centerText: '${provider.numberOfkeys}',
+              centerText: '${dataProvider.numberOfkeys}',
               ringStrokeWidth: 20,
               chartType: ChartType.ring,
               animationDuration: const Duration(seconds: 3),

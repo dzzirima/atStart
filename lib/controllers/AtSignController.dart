@@ -8,13 +8,27 @@ import 'package:snackbar/utils/MySnackBar.dart';
 import 'package:snackbar/utils/templates/template.dart';
 import 'package:uuid/uuid.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:flutter/cupertino.dart';
 
-class TrackerTimerController {
+class TrackerTimerController extends ChangeNotifier {
   static AtClient atClient = atClientManager.atClient;
   AtClientService? atClientService;
   static var atClientManager = AtClientManager.getInstance();
   static var currentAtsign = atClientManager.atClient.getCurrentAtSign();
-  static GetDataProvider myDataProvider = new GetDataProvider();
+
+  List<TimerItem> myTimers = [];
+  int numberOfkeys = 0;
+  bool loading = false;
+
+  /**function to notify other widgets */
+  void getNewData() async {
+    myTimers = [];
+    await this.getAtSignData("context", "");
+
+    this.numberOfkeys = myTimers.length;
+    print(myTimers.length);
+    this.notifyListeners();
+  }
 
   static void sendAtSignData(context, TimerItem myTrackerData) async {
     try {
@@ -44,7 +58,6 @@ class TrackerTimerController {
   }
 
   getAtSignData(context, String lookUpKey) async {
-    List<TimerItem> myTimers = [];
     try {
       /**This function is used to lookup the keys 
      * but i have a problem how can i look up if i dont know the keys
@@ -66,6 +79,7 @@ class TrackerTimerController {
             //creating a timer here forom json
             myTimers.add(TimerItem.fromJson(_keyValue.value));
             // myTimers.add(myItemJson);
+
           }
         } catch (e) {
           print(e.toString());
@@ -77,7 +91,5 @@ class TrackerTimerController {
     } catch (e) {
       print(e.toString());
     }
-
-    myDataProvider.setListOfTimers(myTimers);
   }
 }

@@ -7,17 +7,17 @@ import 'package:snackbar/model/timerItem.dart';
 class GetDataProvider extends ChangeNotifier {
   TrackerTimerController timerController = new TrackerTimerController();
 
-  List<AtKey> myKeys = [];
-  int _count = 0;
   int numberOfkeys = 0;
   bool loading = false;
-  int get count => _count;
+
   List<TimerItem> myTimers = [];
 
   void setListOfTimers(List<TimerItem> myyTimers) {
-    print(this.myTimers);
-    this.myTimers = myyTimers;
-    print(".................." + this.myTimers.toString());
+    myTimers.addAll(myyTimers);
+    this.numberOfkeys = this.myTimers.length;
+    this.increment();
+    notifyListeners();
+    print(this.numberOfkeys);
   }
 
   void getRemoteKeys() {
@@ -34,10 +34,8 @@ class GetDataProvider extends ChangeNotifier {
   }
 
   void increment() {
-    _count++;
     numberOfkeys++;
 
     notifyListeners();
-    print("counter value :" + _count.toString());
   }
 }
