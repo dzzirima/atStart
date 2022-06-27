@@ -42,35 +42,29 @@ class TrackerTimerController {
   }
 
   void getAtSignData(context, String lookUpKey) async {
-    String RegExp = "/.*/";
-    regex:
-    '^cached:.*@.+\$';
-    String regex2 = "";
-
     try {
       /**This function is used to lookup the keys 
      * but i have a problem how can i look up if i dont know the keys
-     * 
+     * Solved by getting  scanning the whole atSign seconadry
      */
       AtClient atClient = AtClientManager.getInstance().atClient;
       var currentAtsign = atClient.getCurrentAtSign();
       /**I dont want to repeat copying this thing  */
 
-      var metaData = Metadata()
-        ..isPublic = true
-        ..isEncrypted = true
-        ..namespaceAware = true;
-
-      var key = AtKey()
-        ..key = 'trkzirima'
-        ..metadata = metaData;
-
       //**getting all the time trackers i would have added */
       var userKeys = await atClient.getAtKeys(regex: '[public]:[trk]');
-
-      var trackerTime = await atClient.get(key);
-
-      print("Here are your keys :" + userKeys.toString());
+      List<AtKey> receivedKeys = [];
+      receivedKeys.addAll(userKeys);
+      for (AtKey key in receivedKeys) {
+        try {
+          if (key.sharedBy != null) {
+            AtValue _keyValue = await atClient.get(key);
+            print(_keyValue.value);
+          }
+        } catch (e) {
+          print(e.toString());
+        }
+      }
       // print("Current atSign:" + currentAtsign!);
       // print("Here are your results :" + trackerTime.value.toString());
     } catch (e) {
