@@ -75,11 +75,11 @@ class _PieChartSummaryState extends State<PieChartSummary> {
               height: 10,
             ),
             PieChart(
-              dataMap: dataMap,
+              dataMap: dataProvider.dataMap,
               colorList: colorList,
               chartRadius: MediaQuery.of(context).size.width / 2,
               //consuming the provider value
-              centerText: '${dataProvider.numberOfkeys}',
+              centerText: '${(dataProvider.totalWorkingHours) / 100} : Hours',
               ringStrokeWidth: 20,
               chartType: ChartType.ring,
               animationDuration: const Duration(seconds: 3),

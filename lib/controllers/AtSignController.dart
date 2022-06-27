@@ -19,6 +19,7 @@ class TrackerTimerController extends ChangeNotifier {
 
   int numberOfkeys = 0;
   bool loading = false;
+  var totalWorkingHours = 0;
 
   /**function to notify other widgets */
   void getNewData() async {
@@ -27,8 +28,9 @@ class TrackerTimerController extends ChangeNotifier {
     await this.getAtSignData("context", "");
 
     this.numberOfkeys = myTimers.length;
-    this.notifyListeners();
+
     calculateSummaryData();
+    this.notifyListeners();
   }
 
   static void sendAtSignData(context, TimerItem myTrackerData) async {
@@ -95,6 +97,7 @@ class TrackerTimerController extends ChangeNotifier {
   /**funtion to do the calculations and summary data  for the graph */
 
   void calculateSummaryData() {
+    totalWorkingHours = 0;
     myTimers.forEach((element) {
       //get the groups in the list of dos
 
@@ -109,9 +112,12 @@ class TrackerTimerController extends ChangeNotifier {
 
     //adding the totals  to individual group
     myTimers.forEach((element) {
-      
       var focusTime = int.parse(element.endTime) - int.parse(element.startTime);
-      dataMap[element.id] = dataMap[element.id]! + focusTime;
+      dataMap[element.id] = (dataMap[element.id]! + focusTime).roundToDouble();
+
+      totalWorkingHours = focusTime + totalWorkingHours;
     });
+
+    print(totalWorkingHours / 100);
   }
 }
