@@ -12,6 +12,7 @@ class TrackerTimerController extends ChangeNotifier {
   static var currentAtsign = atClientManager.atClient.getCurrentAtSign();
 
   List<TimerItem> myTimers = [];
+  List<String> myGroups = [];
 
   int numberOfkeys = 0;
   bool loading = false;
@@ -24,6 +25,7 @@ class TrackerTimerController extends ChangeNotifier {
 
     this.numberOfkeys = myTimers.length;
     this.notifyListeners();
+    calculateSummaryData();
   }
 
   static void sendAtSignData(context, TimerItem myTrackerData) async {
@@ -71,7 +73,6 @@ class TrackerTimerController extends ChangeNotifier {
         try {
           if (key.sharedBy != null) {
             AtValue _keyValue = await atClient.get(key);
-            print(_keyValue.value);
 
             //creating a timer here forom json
             myTimers.add(TimerItem.fromJson(_keyValue.value));
@@ -86,5 +87,19 @@ class TrackerTimerController extends ChangeNotifier {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  /**funtion to do the calculations and summary data  for the graph */
+
+  void calculateSummaryData() {
+    myTimers.forEach((element) {
+      //get the groups in the list of dos
+
+      if (!(myGroups.indexOf(element.id) >= 0)) {
+        myGroups.add(element.id);
+      }
+    });
+
+    print(myGroups);
   }
 }
