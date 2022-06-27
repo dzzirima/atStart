@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:snackbar/model/timerItem.dart';
@@ -13,6 +15,7 @@ class TrackerTimerController extends ChangeNotifier {
 
   List<TimerItem> myTimers = [];
   List<String> myGroups = [];
+  Map<String, double> dataMap = {};
 
   int numberOfkeys = 0;
   bool loading = false;
@@ -99,7 +102,16 @@ class TrackerTimerController extends ChangeNotifier {
         myGroups.add(element.id);
       }
     });
+    //create a map of all the categories
+    myGroups.forEach((element) {
+      dataMap[element] = 0.0;
+    });
 
-    print(myGroups);
+    //adding the totals  to individual group
+    myTimers.forEach((element) {
+      
+      var focusTime = int.parse(element.endTime) - int.parse(element.startTime);
+      dataMap[element.id] = dataMap[element.id]! + focusTime;
+    });
   }
 }
