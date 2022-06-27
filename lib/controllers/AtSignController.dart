@@ -41,7 +41,8 @@ class TrackerTimerController {
     }
   }
 
-  Future getAtSignData(context, String lookUpKey) async {
+  Future<List<TimerItem>> getAtSignData(context, String lookUpKey) async {
+    List<TimerItem> myTimers = [];
     try {
       /**This function is used to lookup the keys 
      * but i have a problem how can i look up if i dont know the keys
@@ -53,22 +54,26 @@ class TrackerTimerController {
       //**getting all the time trackers i would have added */
       var userKeys = await atClient.getAtKeys(regex: '[public]:[trk]');
       List<AtKey> receivedKeys = [];
+
       receivedKeys.addAll(userKeys);
       for (AtKey key in receivedKeys) {
         try {
           if (key.sharedBy != null) {
             AtValue _keyValue = await atClient.get(key);
-            print(_keyValue.value);
+            //creating a timer here forom json
+            myTimers.add(TimerItem.fromJson(jsonDecode(_keyValue.value)));
           }
         } catch (e) {
           print(e.toString());
         }
       }
-      return receivedKeys.length;
+
       // print("Current atSign:" + currentAtsign!);
       // print("Here are your results :" + trackerTime.value.toString());
     } catch (e) {
       print(e.toString());
     }
+
+    return myTimers;
   }
 }
