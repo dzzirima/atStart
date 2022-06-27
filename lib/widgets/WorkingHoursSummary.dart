@@ -1,8 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:snackbar/controllers/AtSignController.dart';
 import 'package:snackbar/providers/GetData.dart';
@@ -20,14 +18,13 @@ class _WorkingHoursSummaryState extends State<WorkingHoursSummary> {
 
   @override
   Widget build(BuildContext context) {
+    //provider listen , means dont change ..
     var provider = Provider.of<GetDataProvider>(context, listen: false);
+
     return Container(
       child: GestureDetector(
         onTap: () {
-          /**we awant to refresh the summary and get new things when we refresh 
-           * 
-          */
-          // timerController.getAtSignData(context, "david");
+          //change the internal structure of the global state of the provider
           provider.increment();
         },
         child: DottedBorder(

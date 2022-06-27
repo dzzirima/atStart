@@ -47,7 +47,9 @@ class _PieChartSummaryState extends State<PieChartSummary> {
   ];
   @override
   Widget build(BuildContext context) {
+    //provider declaration for the consumer :here listen= true means rebuld
     var provider = Provider.of<GetDataProvider>(context, listen: true);
+
     return SafeArea(
       child: Container(
         child: Column(
@@ -74,7 +76,8 @@ class _PieChartSummaryState extends State<PieChartSummary> {
               dataMap: dataMap,
               colorList: colorList,
               chartRadius: MediaQuery.of(context).size.width / 2,
-              centerText: '${provider.count}',
+              //consuming the provider value
+              centerText: '${provider.numberOfkeys}',
               ringStrokeWidth: 20,
               chartType: ChartType.ring,
               animationDuration: const Duration(seconds: 3),
