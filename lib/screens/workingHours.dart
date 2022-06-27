@@ -1,6 +1,7 @@
 //this screen contains the working hours you have done
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:snackbar/constants/GlobalVariables.dart';
 import 'package:snackbar/controllers/AtSignController.dart';
 import 'package:snackbar/model/timerItem.dart';
@@ -45,6 +46,10 @@ class _WorkingHoursState extends State<WorkingHours> {
   @override
   Widget build(BuildContext context) {
     TrackerTimerController timerController = new TrackerTimerController();
+    var dataProvider =
+        Provider.of<TrackerTimerController>(context, listen: true);
+    List<TimerItem> myTimers = dataProvider.myTimers;
+
     return Scaffold(
       body: Center(
         child: Padding(
@@ -57,70 +62,16 @@ class _WorkingHoursState extends State<WorkingHours> {
                 height: 20,
               ),
               Expanded(
-                child: ListView(
+                child: ListView.builder(
                   shrinkWrap: true,
-                  children: const [
-                    FocusTimeCard(
-                        type: "Dev",
-                        date: "28-06-2022",
-                        endTime: "1600",
-                        startTime: '1300'),
-                    FocusTimeCard(
-                        type: "Dev",
-                        date: "28-06-2022",
-                        endTime: "1600",
-                        startTime: '1300'),
-                    FocusTimeCard(
-                        type: "Dev",
-                        date: "28-06-2022",
-                        endTime: "1600",
-                        startTime: '1300'),
-                    FocusTimeCard(
-                        type: "Dev",
-                        date: "28-06-2022",
-                        endTime: "1600",
-                        startTime: '1300'),
-                    FocusTimeCard(
-                        type: "Dev",
-                        date: "28-06-2022",
-                        endTime: "1600",
-                        startTime: '1300'),
-                    FocusTimeCard(
-                        type: "Dev",
-                        date: "28-06-2022",
-                        endTime: "1600",
-                        startTime: '1300'),
-                    FocusTimeCard(
-                        type: "Dev",
-                        date: "28-06-2022",
-                        endTime: "1600",
-                        startTime: '1300'),
-                    FocusTimeCard(
-                        type: "MkT",
-                        date: "23-06-2022",
-                        endTime: "1700",
-                        startTime: '1330'),
-                    FocusTimeCard(
-                        type: "MkT",
-                        date: "23-06-2022",
-                        endTime: "1800",
-                        startTime: '1400'),
-                    FocusTimeCard(
-                        type: "Dev",
-                        date: "23-06-2022",
-                        endTime: "1600",
-                        startTime: '1300'),
-                    FocusTimeCard(
-                        type: "MkT",
-                        date: "23-06-2022",
-                        endTime: "1700",
-                        startTime: '1330'),
-                    FocusTimeCard(
-                        type: "MkT",
-                        date: "23-06-2022",
-                        endTime: "1800",
-                        startTime: '1400'),
-                  ],
+                  itemCount: dataProvider.numberOfkeys,
+                  itemBuilder: (BuildContext context, int index) {
+                    return FocusTimeCard(
+                      type: myTimers[index].id,
+                      startTime: myTimers[index].startTime,
+                      endTime: myTimers[index].endTime,
+                    );
+                  },
                 ),
               )
             ],
@@ -201,11 +152,8 @@ class _WorkingHoursState extends State<WorkingHours> {
         ),
       );
   void submit() {
-    TimerItem newTrackerData = new TimerItem(
-        "davidtext",
-        startTimeController.text,
-        endTimeController.text,
-        descriptionController.text);
+    TimerItem newTrackerData = new TimerItem(category, startTimeController.text,
+        endTimeController.text, descriptionController.text);
 
     //sending to the server
     TrackerTimerController.sendAtSignData(context, newTrackerData);

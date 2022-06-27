@@ -1,14 +1,9 @@
-import 'dart:convert';
-
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:snackbar/model/timerItem.dart';
-import 'package:snackbar/providers/GetData.dart';
 import 'package:snackbar/utils/MySnackBar.dart';
-import 'package:snackbar/utils/templates/template.dart';
-import 'package:uuid/uuid.dart';
 import 'package:nanoid/nanoid.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:snackbar/widgets/FocusTimeCard.dart';
 
 class TrackerTimerController extends ChangeNotifier {
   static AtClient atClient = atClientManager.atClient;
@@ -17,16 +12,17 @@ class TrackerTimerController extends ChangeNotifier {
   static var currentAtsign = atClientManager.atClient.getCurrentAtSign();
 
   List<TimerItem> myTimers = [];
+
   int numberOfkeys = 0;
   bool loading = false;
 
   /**function to notify other widgets */
   void getNewData() async {
     myTimers = [];
+
     await this.getAtSignData("context", "");
 
     this.numberOfkeys = myTimers.length;
-    print(myTimers.length);
     this.notifyListeners();
   }
 
@@ -75,11 +71,10 @@ class TrackerTimerController extends ChangeNotifier {
         try {
           if (key.sharedBy != null) {
             AtValue _keyValue = await atClient.get(key);
+            print(_keyValue.value);
 
             //creating a timer here forom json
             myTimers.add(TimerItem.fromJson(_keyValue.value));
-            // myTimers.add(myItemJson);
-
           }
         } catch (e) {
           print(e.toString());
