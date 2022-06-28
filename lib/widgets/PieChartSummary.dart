@@ -75,7 +75,9 @@ class _PieChartSummaryState extends State<PieChartSummary> {
               height: 10,
             ),
             PieChart(
-              dataMap: dataProvider.dataMap,
+              dataMap: (dataProvider.dataMap).isNotEmpty
+                  ? dataProvider.dataMap
+                  : dataMap,
               colorList: colorList,
               chartRadius: MediaQuery.of(context).size.width / 2,
               //consuming the provider value
