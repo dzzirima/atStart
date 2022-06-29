@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
@@ -24,10 +26,20 @@ class CreatePdf {
   ];
 
   Future<void> createPdf() async {
+    final PdfColor baseColor;
+
     final pdf = pw.Document();
 
+    // String logo = await rootBundle.loadString('assets/logo.svg');
+
     pdf.addPage(pw.MultiPage(
-      build: (context) => [_contentTable(context)],
+      header: _buildHeader,
+      build: (context) => [
+        _contentHeader(
+          context,
+        ),
+        _contentTable(context),
+      ],
     ));
 
     try {
@@ -46,9 +58,162 @@ class CreatePdf {
     }
   }
 
+  pw.Widget _buildHeader(pw.Context context) {
+    PdfColor baseColor = PdfColors.teal;
+    PdfColor _baseTextColor = PdfColors.white;
+    PdfColor accentColor = PdfColors.blueGrey900;
+    PdfColor _accentTextColor = PdfColors.white;
+    String? _logo;
+    return pw.Column(
+      children: [
+        pw.Row(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            pw.Expanded(
+              child: pw.Column(
+                children: [
+                  pw.Container(
+                    height: 50,
+                    padding: const pw.EdgeInsets.only(left: 20),
+                    alignment: pw.Alignment.centerLeft,
+                    child: pw.Text(
+                      'INVOICE',
+                      style: pw.TextStyle(
+                        color: baseColor,
+                        fontWeight: pw.FontWeight.bold,
+                        fontSize: 40,
+                      ),
+                    ),
+                  ),
+                  pw.Container(
+                    decoration: pw.BoxDecoration(
+                      borderRadius:
+                          const pw.BorderRadius.all(pw.Radius.circular(2)),
+                      color: accentColor,
+                    ),
+                    padding: const pw.EdgeInsets.only(
+                        left: 40, top: 10, bottom: 10, right: 20),
+                    alignment: pw.Alignment.centerLeft,
+                    height: 50,
+                    child: pw.DefaultTextStyle(
+                      style: pw.TextStyle(
+                        color: _accentTextColor,
+                        fontSize: 12,
+                      ),
+                      child: pw.GridView(
+                        crossAxisCount: 2,
+                        children: [
+                          pw.Text('Invoice #'),
+                          pw.Text("#####"),
+                          pw.Text('Date:'),
+                          pw.Text(_formatDate(DateTime.now())),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            pw.Expanded(
+              child: pw.Column(
+                mainAxisSize: pw.MainAxisSize.min,
+                children: [
+                  pw.Container(
+                    alignment: pw.Alignment.topRight,
+                    padding: const pw.EdgeInsets.only(bottom: 8, left: 30),
+                    height: 72,
+                    child: _logo != null
+                        ? pw.SvgImage(svg: "assets/logo.svg")
+                        : pw.PdfLogo(),
+                  ),
+                  // pw.Container(
+                  //   color: baseColor,
+                  //   padding: pw.EdgeInsets.only(top: 3),
+                  // ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        if (context.pageNumber > 1) pw.SizedBox(height: 20)
+      ],
+    );
+  }
+
+  pw.Widget _contentHeader(pw.Context context) {
+    PdfColor baseColor = PdfColors.teal;
+    PdfColor _darkColor = PdfColors.blueGrey800;
+    return pw.Row(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Expanded(
+          child: pw.Container(
+            margin: const pw.EdgeInsets.symmetric(horizontal: 20),
+            height: 70,
+            child: pw.FittedBox(
+              child: pw.Text(
+                'Total: ${_formatCurrency(12580)}',
+                style: pw.TextStyle(
+                  color: baseColor,
+                  fontStyle: pw.FontStyle.italic,
+                ),
+              ),
+            ),
+          ),
+        ),
+        pw.Expanded(
+          child: pw.Row(
+            children: [
+              pw.Container(
+                margin: const pw.EdgeInsets.only(left: 10, right: 10),
+                height: 70,
+                child: pw.Text(
+                  'Invoice to:',
+                  style: pw.TextStyle(
+                    color: _darkColor,
+                    fontWeight: pw.FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              pw.Expanded(
+                child: pw.Container(
+                  height: 70,
+                  child: pw.RichText(
+                      text: pw.TextSpan(
+                          text: "customerName\n",
+                          style: pw.TextStyle(
+                            color: _darkColor,
+                            fontWeight: pw.FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                          children: [
+                        const pw.TextSpan(
+                          text: '\n',
+                          style: pw.TextStyle(
+                            fontSize: 5,
+                          ),
+                        ),
+                        pw.TextSpan(
+                          text: "customerAddress",
+                          style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.normal,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ])),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   pw.Widget _contentTable(pw.Context context) {
     PdfColor baseColor = PdfColors.teal;
-    PdfColor _baseTextColor = PdfColors.teal;
+    PdfColor _baseTextColor = PdfColors.white;
     PdfColor _darkColor = PdfColors.blueGrey800;
 
     const tableHeaders = [
