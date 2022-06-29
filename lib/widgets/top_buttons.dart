@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:intern_time_tracker/utils/pdfgeneration/createPDF.dart';
 import 'package:intern_time_tracker/widgets/ActionButton.dart';
 
 class TopButtons extends StatefulWidget {
@@ -21,7 +22,9 @@ class _TopButtonsState extends State<TopButtons> {
             ActionButton(
               text: "Export",
               btnIcon: const Icon(Icons.download_outlined),
-              onTap: () {},
+              onTap: () {
+                CreatePdf.createPdf();
+              },
             ),
             const SizedBox(height: 10),
             ActionButton(
