@@ -1,8 +1,8 @@
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:snackbar/controllers/AtSignController.dart';
-import 'package:snackbar/model/timerItem.dart';
+import 'package:intern_time_tracker/controllers/AtSignController.dart';
+import 'package:intern_time_tracker/model/timerItem.dart';
 
 class GetDataProvider extends ChangeNotifier {
   TrackerTimerController timerController = new TrackerTimerController();

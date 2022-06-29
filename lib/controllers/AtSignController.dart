@@ -2,10 +2,10 @@ import 'dart:ffi';
 
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:snackbar/model/timerItem.dart';
-import 'package:snackbar/utils/MySnackBar.dart';
+import 'package:intern_time_tracker/model/timerItem.dart';
+import 'package:intern_time_tracker/utils/MySnackBar.dart';
 import 'package:nanoid/nanoid.dart';
-import 'package:snackbar/widgets/FocusTimeCard.dart';
+import 'package:intern_time_tracker/widgets/FocusTimeCard.dart';
 
 class TrackerTimerController extends ChangeNotifier {
   static AtClient atClient = atClientManager.atClient;

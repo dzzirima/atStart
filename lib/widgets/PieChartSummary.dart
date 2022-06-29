@@ -4,8 +4,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
-import 'package:snackbar/controllers/AtSignController.dart';
-import 'package:snackbar/providers/GetData.dart';
+import 'package:intern_time_tracker/controllers/AtSignController.dart';
+import 'package:intern_time_tracker/providers/GetData.dart';
 
 class PieChartSummary extends StatefulWidget {
   const PieChartSummary({Key? key}) : super(key: key);

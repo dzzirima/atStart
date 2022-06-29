@@ -14,9 +14,9 @@ import 'package:path_provider/path_provider.dart'
     show getApplicationSupportDirectory;
 import 'package:at_app_flutter/at_app_flutter.dart' show AtEnv;
 import 'package:provider/provider.dart';
-import 'package:snackbar/controllers/AtSignController.dart';
-import 'package:snackbar/providers/GetData.dart';
-import 'package:snackbar/widgets/BottomBar.dart';
+import 'package:intern_time_tracker/controllers/AtSignController.dart';
+import 'package:intern_time_tracker/providers/GetData.dart';
+import 'package:intern_time_tracker/widgets/BottomBar.dart';
 
 //String snack = '';
 Future<void> main() async {

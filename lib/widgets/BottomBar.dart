@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:snackbar/constants/GlobalVariables.dart';
-import 'package:snackbar/screens/WorkingHoursActions.dart';
-import 'package:snackbar/screens/workingHours.dart';
-
+import 'package:intern_time_tracker/constants/GlobalVariables.dart';
+import 'package:intern_time_tracker/screens/WorkingHoursActions.dart';
+import 'package:intern_time_tracker/screens/workingHours.dart';
 
 class BottomBar extends StatefulWidget {
   static const String routeName = "/actual-home";

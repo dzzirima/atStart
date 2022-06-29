@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:snackbar/widgets/top_buttons.dart';
+import 'package:intern_time_tracker/widgets/top_buttons.dart';
 
 class WorkingHoursActions extends StatelessWidget {
   const WorkingHoursActions({Key? key}) : super(key: key);

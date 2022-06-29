@@ -2,9 +2,9 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snackbar/controllers/AtSignController.dart';
-import 'package:snackbar/providers/GetData.dart';
-import 'package:snackbar/widgets/PieChartSummary.dart';
+import 'package:intern_time_tracker/controllers/AtSignController.dart';
+import 'package:intern_time_tracker/providers/GetData.dart';
+import 'package:intern_time_tracker/widgets/PieChartSummary.dart';
 
 class WorkingHoursSummary extends StatefulWidget {
   const WorkingHoursSummary({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snackbar/screens/workingHours.dart';
+import 'package:intern_time_tracker/screens/workingHours.dart';
 
 // The onGenearte callback function in the main file allows us to pass arguments
 //  to the next screen.

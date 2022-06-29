@@ -2,15 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snackbar/constants/GlobalVariables.dart';
-import 'package:snackbar/controllers/AtSignController.dart';
-import 'package:snackbar/model/timerItem.dart';
-import 'package:snackbar/utils/MySnackBar.dart';
-import 'package:snackbar/utils/templates/template.dart';
-import 'package:snackbar/widgets/CustomButton.dart';
-import 'package:snackbar/widgets/CustomeEditText.dart';
-import 'package:snackbar/widgets/FocusTimeCard.dart';
-import 'package:snackbar/widgets/WorkingHoursSummary.dart';
+import 'package:intern_time_tracker/constants/GlobalVariables.dart';
+import 'package:intern_time_tracker/controllers/AtSignController.dart';
+import 'package:intern_time_tracker/model/timerItem.dart';
+
+import 'package:intern_time_tracker/widgets/CustomButton.dart';
+import 'package:intern_time_tracker/widgets/CustomeEditText.dart';
+import 'package:intern_time_tracker/widgets/FocusTimeCard.dart';
+import 'package:intern_time_tracker/widgets/WorkingHoursSummary.dart';
 
 class WorkingHours extends StatefulWidget {
   const WorkingHours({Key? key}) : super(key: key);
