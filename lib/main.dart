@@ -68,6 +68,7 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Securely Track Your Activities'),
+          centerTitle: true,
         ),
         body: Builder(
           builder: (context) => Center(

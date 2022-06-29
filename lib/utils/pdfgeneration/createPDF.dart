@@ -33,9 +33,7 @@ class CreatePdf {
     pdf.addPage(pw.MultiPage(
       header: _buildHeader,
       build: (context) => [
-        _contentHeader(
-          context,
-        ),
+        _contentHeader(context, dataProvider.totalWorkingHours),
         _contentTable(context, myTimers),
       ],
     ));
@@ -138,7 +136,7 @@ class CreatePdf {
     );
   }
 
-  pw.Widget _contentHeader(pw.Context context) {
+  pw.Widget _contentHeader(pw.Context context, int hours) {
     PdfColor baseColor = PdfColors.teal;
     PdfColor _darkColor = PdfColors.blueGrey800;
     return pw.Row(
@@ -150,7 +148,7 @@ class CreatePdf {
             height: 70,
             child: pw.FittedBox(
               child: pw.Text(
-                'Total: ${_formatCurrency(12580)}',
+                'Total Hours : ${hours.toString()}',
                 style: pw.TextStyle(
                   color: baseColor,
                   fontStyle: pw.FontStyle.italic,
@@ -166,7 +164,7 @@ class CreatePdf {
                 margin: const pw.EdgeInsets.only(left: 10, right: 10),
                 height: 70,
                 child: pw.Text(
-                  'Invoice to:',
+                  'Invoice By:',
                   style: pw.TextStyle(
                     color: _darkColor,
                     fontWeight: pw.FontWeight.bold,
@@ -179,7 +177,7 @@ class CreatePdf {
                   height: 70,
                   child: pw.RichText(
                       text: pw.TextSpan(
-                          text: "customerName\n",
+                          text: "David T Zirima",
                           style: pw.TextStyle(
                             color: _darkColor,
                             fontWeight: pw.FontWeight.bold,
@@ -193,7 +191,7 @@ class CreatePdf {
                           ),
                         ),
                         pw.TextSpan(
-                          text: "customerAddress",
+                          text: "@relievejetsprint",
                           style: pw.TextStyle(
                             fontWeight: pw.FontWeight.normal,
                             fontSize: 10,
