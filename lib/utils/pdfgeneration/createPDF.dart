@@ -1,32 +1,30 @@
 import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intern_time_tracker/model/timerItem.dart';
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:path_provider/path_provider.dart';
 import 'package:printing/printing.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import 'package:intern_time_tracker/controllers/AtSignController.dart';
 
 class CreatePdf {
-  final products = <Product>[
-    Product('19874', "chicken Gafa", 3.99, 2),
-    Product('98452', "lorem.sentence(6)", 15, 2),
-    Product('28375', "lorem.sentence(4)", 6.95, 3),
-    Product('95673', "lorem.sentence(3)", 49.99, 4),
-    Product('23763', "lorem.sentence(2)", 560.03, 1),
-    Product('55209', "lorem.sentence(5)", 26, 1),
-    Product('09853', "lorem.sentence(5)", 26, 1),
-    Product('23463', "lorem.sentence(5)", 34, 1),
-    Product('56783', "lorem.sentence(5)", 7, 4),
-    Product('78256', "lorem.sentence(5)", 23, 1),
-    Product('23745', "lorem.sentence(5)", 94, 1),
-    Product('07834', "lorem.sentence(5)", 12, 1),
-    Product('23547', "lorem.sentence(5)", 34, 1),
-    Product('98387', "lorem.sentence(5)", 7.99, 2),
-  ];
+  final BuildContext mycontext;
+
+  CreatePdf({
+    required this.mycontext,
+  });
 
   Future<void> createPdf() async {
     final PdfColor baseColor;
+    var dataProvider =
+        Provider.of<TrackerTimerController>(mycontext, listen: false);
+    List<TimerItem> myTimers = dataProvider.myTimers;
 
     final pdf = pw.Document();
 
@@ -38,7 +36,7 @@ class CreatePdf {
         _contentHeader(
           context,
         ),
-        _contentTable(context),
+        _contentTable(context, myTimers),
       ],
     ));
 
@@ -211,17 +209,18 @@ class CreatePdf {
     );
   }
 
-  pw.Widget _contentTable(pw.Context context) {
+  pw.Widget _contentTable(pw.Context context, List<TimerItem> myTimersObjects) {
     PdfColor baseColor = PdfColors.teal;
     PdfColor _baseTextColor = PdfColors.white;
     PdfColor _darkColor = PdfColors.blueGrey800;
 
     const tableHeaders = [
-      'SKU#',
-      'Item Description',
-      'Price',
-      'Quantity',
-      'Total'
+      'Date',
+      'start Time',
+      'End Time',
+      'Category',
+      'Total',
+      'description'
     ];
 
     return pw.Table.fromTextArray(
@@ -262,10 +261,10 @@ class CreatePdf {
         (col) => tableHeaders[col],
       ),
       data: List<List<String>>.generate(
-        products.length,
+        myTimersObjects.length,
         (row) => List<String>.generate(
           tableHeaders.length,
-          (col) => products[row].getIndex(col),
+          (col) => myTimersObjects[row].getIndex(col),
         ),
       ),
     );

@@ -6,7 +6,6 @@ import 'package:intern_time_tracker/model/timerItem.dart';
 
 class GetDataProvider extends ChangeNotifier {
   TrackerTimerController timerController = new TrackerTimerController();
-
   int numberOfkeys = 0;
   bool loading = false;
 

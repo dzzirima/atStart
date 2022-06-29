@@ -60,19 +60,38 @@ class TimerItem {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is TimerItem &&
-      other.id == id &&
-      other.startTime == startTime &&
-      other.endTime == endTime &&
-      other.description == description;
+        other.id == id &&
+        other.startTime == startTime &&
+        other.endTime == endTime &&
+        other.description == description;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      startTime.hashCode ^
-      endTime.hashCode ^
-      description.hashCode;
+        startTime.hashCode ^
+        endTime.hashCode ^
+        description.hashCode;
+  }
+
+  String getIndex(int index) {
+    switch (index) {
+      case 0:
+        return "13-11-2022";
+      case 1:
+        return startTime;
+      case 2:
+        return endTime;
+      case 3:
+        return id;
+      case 4:
+        return ((int.parse(this.endTime) - int.parse(this.startTime)) / 100)
+            .toString();
+      case 5:
+        return description + "....";
+    }
+    return '';
   }
 }
