@@ -23,7 +23,7 @@ class _TopButtonsState extends State<TopButtons> {
               text: "Export",
               btnIcon: const Icon(Icons.download_outlined),
               onTap: () {
-                CreatePdf.createPdf();
+                CreatePdf().createPdf();
               },
             ),
             const SizedBox(height: 10),
