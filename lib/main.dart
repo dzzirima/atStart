@@ -103,33 +103,41 @@ class _MyAppState extends State<MyApp> {
                 height: 60,
                 width: 100,
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(shape: CircleBorder()),
-                  onPressed: () async {
-                    var preference = await futurePreference;
-                    setState(() {
-                      atClientPreference = preference;
-                    });
-                    Onboarding(
-                      context: context,
-                      atClientPreference: atClientPreference!,
-                      domain: AtEnv.rootDomain,
-                      rootEnvironment: AtEnv.rootEnvironment,
-                      appAPIKey: AtEnv.appApiKey,
-                      onboard: (value, atsign) {
-                        _logger.finer('Successfully onboarded $atsign');
-                      },
-                      onError: (error) {
-                        _logger.severe('Onboarding throws $error error');
-                      },
-                      nextScreen: const BottomBar(),
-                    );
-                  },
-                  // child: SvgPicture.asset(
-                  //   "/closes.svg",
-                  //   fit: BoxFit.contain,
-                  // ),
-                  child: Icon(Icons.skip_next_rounded),
-                ),
+                    style: ElevatedButton.styleFrom(
+                        shape: CircleBorder(), primary: Colors.black87),
+                    onPressed: () async {
+                      var preference = await futurePreference;
+                      setState(() {
+                        atClientPreference = preference;
+                      });
+                      Onboarding(
+                        context: context,
+                        atClientPreference: atClientPreference!,
+                        domain: AtEnv.rootDomain,
+                        rootEnvironment: AtEnv.rootEnvironment,
+                        appAPIKey: AtEnv.appApiKey,
+                        onboard: (value, atsign) {
+                          _logger.finer('Successfully onboarded $atsign');
+                        },
+                        onError: (error) {
+                          _logger.severe('Onboarding throws $error error');
+                        },
+                        nextScreen: const BottomBar(),
+                      );
+                    },
+                    // child: SvgPicture.asset(
+                    //   "/closes.svg",
+                    //   fit: BoxFit.contain,
+                    // ),
+                    child: Icon(Icons.arrow_forward)),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                "..onBoard@Sign..",
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w200,
+                    color: Color.fromARGB(255, 29, 28, 28)),
               ),
               const Spacer(),
             ],
