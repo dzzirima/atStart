@@ -32,7 +32,7 @@ Future<void> main() async {
           create: (_) => TrackerTimerController(),
         )
       ],
-      child: const MyApp(),
+      child: MaterialApp(home: MyApp()),
     ),
   );
 }
@@ -128,7 +128,7 @@ class _MyAppState extends State<MyApp> {
                   //   "/closes.svg",
                   //   fit: BoxFit.contain,
                   // ),
-                  child: Text("Hello"),
+                  child: Icon(Icons.skip_next_rounded),
                 ),
               ),
               const Spacer(),
