@@ -10,7 +10,6 @@ import 'package:at_commons/at_commons.dart';
 import 'package:at_onboarding_flutter/at_onboarding_flutter.dart'
     show Onboarding;
 import 'package:at_utils/at_logger.dart' show AtSignLogger;
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:path_provider/path_provider.dart'
     show getApplicationSupportDirectory;
 import 'package:at_app_flutter/at_app_flutter.dart' show AtEnv;
