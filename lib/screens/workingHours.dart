@@ -1,6 +1,7 @@
 //this screen contains the working hours you have done
 
 import 'package:flutter/material.dart';
+import 'package:intern_time_tracker/controllers/DateController.dart';
 import 'package:provider/provider.dart';
 import 'package:intern_time_tracker/constants/GlobalVariables.dart';
 import 'package:intern_time_tracker/controllers/AtSignController.dart';
@@ -79,6 +80,9 @@ class _WorkingHoursState extends State<WorkingHours> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          return print(DateController.calculateTimeInterval(
+              DateController.getCurrentDate(),
+              DateController.getCurrentDate()));
           openDialog();
         },
         backgroundColor: GlobalVariables.selectedNavBarColor,
