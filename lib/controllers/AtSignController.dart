@@ -80,6 +80,8 @@ class TrackerTimerController extends ChangeNotifier {
             AtValue _keyValue = await atClient.get(key);
 
             //creating a timer here forom json
+
+            print(_keyValue);
             myTimers.add(TimerItem.fromJson(_keyValue.value));
           }
         } catch (e) {
@@ -113,7 +115,8 @@ class TrackerTimerController extends ChangeNotifier {
     //adding the totals  to individual group
     myTimers.forEach((element) {
       var focusTime = int.parse(element.endTime) - int.parse(element.startTime);
-      dataMap[element.id] = (dataMap[element.id]! + focusTime).roundToDouble();
+      dataMap[element.id] =
+          ((dataMap[element.id]! + focusTime).roundToDouble()) / 100;
 
       totalWorkingHours = focusTime + totalWorkingHours;
     });

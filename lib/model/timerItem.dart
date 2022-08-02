@@ -7,12 +7,14 @@ class TimerItem {
   final String startTime;
   final String endTime;
   final String description;
+  final String date;
 
   TimerItem(
     this.id,
     this.startTime,
     this.endTime,
     this.description,
+    this.date,
   );
 
   Map<String, dynamic> toMap() {
@@ -21,6 +23,7 @@ class TimerItem {
       'startTime': startTime,
       'endTime': endTime,
       'description': description,
+      'date': date,
     };
   }
 
@@ -30,6 +33,7 @@ class TimerItem {
       map['startTime'],
       map['endTime'],
       map['description'],
+      map['date'],
     );
   }
 
@@ -40,7 +44,7 @@ class TimerItem {
 
   @override
   String toString() {
-    return 'TimerItem(id: $id, startTime: $startTime, endTime: $endTime, description: $description)';
+    return 'TimerItem(id: $id, startTime: $startTime, endTime: $endTime, description: $description ,date: $date)';
   }
 
   TimerItem copyWith({
@@ -48,12 +52,14 @@ class TimerItem {
     String? startTime,
     String? endTime,
     String? description,
+    String? date,
   }) {
     return TimerItem(
       id ?? this.id,
       startTime ?? this.startTime,
       endTime ?? this.endTime,
       description ?? this.description,
+      date ?? this.date,
     );
   }
 

@@ -11,7 +11,7 @@ class DateController {
 
     var formattedDate = myDateFormatter.format(currentDate);
 
-    return currentDate.toString();
+    return formattedDate;
   }
 
   static String getDateTime(String date) {

@@ -67,6 +67,7 @@ class _WorkingHoursState extends State<WorkingHours> {
                   itemCount: dataProvider.numberOfkeys,
                   itemBuilder: (BuildContext context, int index) {
                     return FocusTimeCard(
+                      date: myTimers[index].date,
                       type: myTimers[index].id,
                       startTime: myTimers[index].startTime,
                       endTime: myTimers[index].endTime,
@@ -80,9 +81,6 @@ class _WorkingHoursState extends State<WorkingHours> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          return print(DateController.calculateTimeInterval(
-              DateController.getCurrentDate(),
-              DateController.getCurrentDate()));
           openDialog();
         },
         backgroundColor: GlobalVariables.selectedNavBarColor,
@@ -155,8 +153,12 @@ class _WorkingHoursState extends State<WorkingHours> {
         ),
       );
   void submit() {
-    TimerItem newTrackerData = new TimerItem(category, startTimeController.text,
-        endTimeController.text, descriptionController.text);
+    TimerItem newTrackerData = new TimerItem(
+        category,
+        startTimeController.text,
+        endTimeController.text,
+        descriptionController.text,
+        DateController.getCurrentDate());
 
     //sending to the server
     TrackerTimerController.sendAtSignData(context, newTrackerData);

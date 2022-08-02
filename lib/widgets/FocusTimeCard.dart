@@ -8,15 +8,16 @@ class FocusTimeCard extends StatelessWidget {
       required this.type,
       required this.startTime,
       required this.endTime,
-      this.date = ""})
+      required this.date})
       : super(key: key);
   final String type;
   final String startTime;
   final String endTime;
-  final String? date;
+  final String date;
 
   @override
   Widget build(BuildContext context) {
+    var duration = (int.parse(endTime) - int.parse(startTime)) / 100;
     return Card(
       child: ListTile(
         leading: const Icon(
@@ -36,7 +37,7 @@ class FocusTimeCard extends StatelessWidget {
                   baseline: TextBaseline.alphabetic,
                   child: SizedBox(width: 10)),
               TextSpan(
-                text: '$date  :: $startTime - $endTime ',
+                text: '$date    $startTime - $endTime ',
                 // ignore: prefer_const_constructors
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
@@ -45,7 +46,8 @@ class FocusTimeCard extends StatelessWidget {
             ],
           ),
         ),
-        subtitle: Text('You focused for :3hrs 24 mins'),
+        // int.parse(element.endTime) - int.parse(element.startTime);
+        subtitle: Text("You focused for :$duration hours"),
         trailing: const Icon(Icons.more_vert),
       ),
     );
